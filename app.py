@@ -7,7 +7,7 @@ from tensorflow import keras
 st.set_page_config(page_title="Unemployment Risk Predictor", layout="wide")
 
 """
-Streamlit App — **Unemployment Risk Predictor By LZY**
+Streamlit App — **Unemployment Risk Predictor Created By LZY**
 -----------------------------------------------------------------------
 Estimate the probability that an individual becomes unemployed **within the next month**.
 """
