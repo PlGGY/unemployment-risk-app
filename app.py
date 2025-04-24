@@ -7,7 +7,23 @@ from tensorflow import keras
 st.set_page_config(page_title="Unemployment Risk Predictor", layout="wide")
 
 """
-Streamlit App — Unemployment Risk Predictor (Drag‑to‑Choose Edition)
+Streamlit App — **Unemployment Risk Predictor (Drag‑to‑Choose Edition)**
+-----------------------------------------------------------------------
+This app estimates the probability that an individual becomes unemployed **within the next month**.
+
+Highlights
+~~~~~~~~~~
+* Occupation, Education, Region, Division, and Race are selectable via sliders/drop‑downs.
+* The *Division* list is **dynamically filtered** based on the chosen *Region* to avoid invalid combinations (e.g. only “New England” and “Middle Atlantic” are shown when *Northeast* is selected).
+* Risk level is shown with `st.error / warning / success` instead of dynamic `getattr`.
+* Run locally with:
+
+    ```bash
+    streamlit run app.py
+    ```
+
+Dependencies: `streamlit`, `pandas`, `numpy`, `joblib`, `tensorflow`.
+"""
 
 # ----------------------------- Load artefacts -----------------------------
 @st.cache_resource(show_spinner=False)
@@ -45,7 +61,6 @@ region_to_divisions = {
 }
 
 all_regions   = list(region_to_divisions.keys())
-all_divisions = sorted({d for lst in region_to_divisions.values() for d in lst})
 
 # ----------------------------- UI Layout ----------------------------------
 
@@ -60,7 +75,7 @@ with st.sidebar:
 
     # Division choices depend on Region
     division_opts = region_to_divisions.get(region, region_to_divisions["Unknown"])
-    division = st.selectbox("Census Division", options=division_opts, index=0)
+    division = st.selectbox("Census Division", options=division_opts)
 
     # ---------- Other categorical inputs ----------
     educ = st.select_slider("Education Level", options=[
@@ -76,8 +91,8 @@ with st.sidebar:
         "Other"], value="Service Occupations")
 
     race = st.select_slider("Race / Ethnicity", options=[
-        "White", "Black", "Native American", "Asian", "Pacific Islander",
-        "Other/Multiple"], value="White")
+        "White", "Black", "Native American", "Asian",
+        "Pacific Islander", "Other/Multiple"], value="White")
 
     industry = st.selectbox("Industry Group", [
         "Accommodation and Food Services", "Manufacturing", "Retail Trade",
