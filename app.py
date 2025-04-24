@@ -99,8 +99,8 @@ with st.sidebar:
 
 st.header("Unemployment Risk Predictor")
 
-predict_btn = st.button("🚀 Predict", type="primary")
-        st.json(user_input)
+with st.expander("Show input details"):
+    st.json(user_input)
 "🚀 Predict", type="primary"):
         user_input = {
             "educ_category": educ,
