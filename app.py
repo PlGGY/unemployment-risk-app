@@ -9,20 +9,7 @@ st.set_page_config(page_title="Unemployment Risk Predictor", layout="wide")
 """
 Streamlit App — **Unemployment Risk Predictor (Drag‑to‑Choose Edition)**
 -----------------------------------------------------------------------
-This app estimates the probability that an individual becomes unemployed **within the next month**.
-
-Highlights
-~~~~~~~~~~
-* Occupation **now uses a dropdown** (`st.selectbox`) for clearer selection.
-* *Division* list is **dynamically filtered** based on selected *Region*.
-* Results (probability + risk level) remain displayed in the **main panel on the right**.
-* Run locally with:
-
-    ```bash
-    streamlit run app.py
-    ```
-
-Dependencies: `streamlit`, `pandas`, `numpy`, `joblib`, `tensorflow`.
+Estimate the probability that an individual becomes unemployed **within the next month**.
 """
 
 # -------------------------------------------------------------------------
