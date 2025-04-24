@@ -12,7 +12,7 @@ Streamlit App — **Unemployment Risk Predictor **
 Estimate the probability that an individual becomes unemployed **within the next month**.
 """
 
-# -------------------------------------------------------------------------
+# ----------------------------- Load artefacts -----------------------------
 @st.cache_resource(show_spinner=False)
 def load_assets():
     model = keras.models.load_model("unemployment_model.keras", compile=False)
@@ -24,7 +24,7 @@ def load_assets():
 
 model, X_train_cols, thr_20, thr_40 = load_assets()
 
-# -------------------------------------------------------------------------
+# ----------------------------- Helper -------------------------------------
 
 def predict(user_dict: dict):
     X = pd.DataFrame([user_dict])
@@ -99,34 +99,33 @@ with st.sidebar:
 
 st.header("Unemployment Risk Predictor")
 
-with st.expander("Show input details"):
-    st.json(user_input)
-"🚀 Predict", type="primary"):
-        user_input = {
-            "educ_category": educ,
-            "occupation_category": occ,
-            "IND_GROUP": industry,
-            "race_category": race,
-            "immigration_status": immigrant,
-            "marital_status": marital,
-            "disability_status": disability,
-            "AGE": age,
-            "SEX": sex,
-            "region_category": region,
-            "division_label": division,
-        }
-        prob, risk = predict(user_input)
+predict_btn = st.button("🚀 Predict", type="primary")
 
-        # ----------------------- Result (main panel) ----------------------
-        st.subheader("Result")
-        st.metric("Predicted Probability", f"{prob:.2%}")
+if predict_btn:
+    user_input = {
+        "educ_category": educ,
+        "occupation_category": occ,
+        "IND_GROUP": industry,
+        "race_category": race,
+        "immigration_status": immigrant,
+        "marital_status": marital,
+        "disability_status": disability,
+        "AGE": age,
+        "SEX": sex,
+        "region_category": region,
+        "division_label": division,
+    }
+    prob, risk = predict(user_input)
 
-        if risk == "High Risk":
-            st.error(f"Risk Level: {risk}")
-        elif risk == "Medium Risk":
-            st.warning(f"Risk Level: {risk}")
-        else:
-            st.success(f"Risk Level: {risk}")
+    st.subheader("Result")
+    st.metric("Predicted Probability", f"{prob:.2%}")
 
-        with st.expander("Show input details"):
-            st.json(user_input)
+    if risk == "High Risk":
+        st.error(f"Risk Level: {risk}")
+    elif risk == "Medium Risk":
+        st.warning(f"Risk Level: {risk}")
+    else:
+        st.success(f"Risk Level: {risk}")
+
+    with st.expander("Show input details"):
+        st.json(user_input)
