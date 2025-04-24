@@ -7,7 +7,7 @@ from tensorflow import keras
 st.set_page_config(page_title="Unemployment Risk Predictor", layout="wide")
 
 """
-Streamlit App — **Unemployment Risk Predictor Created By LZY**
+Streamlit App — **Unemployment Risk Predictor (Drag‑to‑Choose Edition)**
 -----------------------------------------------------------------------
 Estimate the probability that an individual becomes unemployed **within the next month**.
 """
@@ -100,34 +100,6 @@ with st.sidebar:
 st.header("Unemployment Risk Predictor")
 
 predict_btn = st.button("🚀 Predict", type="primary")
-
-if predict_btn:
-    user_input = {
-        "educ_category": educ,
-        "occupation_category": occ,
-        "IND_GROUP": industry,
-        "race_category": race,
-        "immigration_status": immigrant,
-        "marital_status": marital,
-        "disability_status": disability,
-        "AGE": age,
-        "SEX": sex,
-        "region_category": region,
-        "division_label": division,
-    }
-    prob, risk = predict(user_input)
-
-    st.subheader("Result")
-    st.metric("Predicted Probability", f"{prob:.2%}")
-
-    if risk == "High Risk":
-        st.error(f"Risk Level: {risk}")
-    elif risk == "Medium Risk":
-        st.warning(f"Risk Level: {risk}")
-    else:
-        st.success(f"Risk Level: {risk}")
-
-    with st.expander("Show input details"):
         st.json(user_input)
 "🚀 Predict", type="primary"):
         user_input = {
