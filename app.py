@@ -4,14 +4,12 @@ import numpy as np
 import joblib
 from tensorflow import keras
 
+st.set_page_config(page_title="Unemployment Risk Predictor", layout="wide")
+
 """
-Streamlit App — Unemployment Risk Predictor (Drag‑to‑Choose Edition)
+Streamlit App — Unemployment Risk Predictor 
 ===================================================================
-• 本版将 **职业 (Occupation)、地区 (Region)、教育 (Education)、分区 (Division)、族裔 (Race)**
-  改为 `st.select_slider`，用户可通过拖拽滑块快速浏览选项。
-• 运行方式：
-      streamlit run app.py
-• 依赖：streamlit, pandas, numpy, joblib, tensorflow
+streamlit, pandas, numpy, joblib, tensorflow
 """
 
 # ---------------------------- Load artefacts -----------------------------
@@ -42,7 +40,6 @@ def predict(user_dict: dict):
 
 # ---------------------------- UI Layout ----------------------------------
 
-st.set_page_config(page_title="Unemployment Risk Predictor", layout="wide")
 st.title("🧮 Unemployment Risk Predictor")
 st.markdown("Drag the sliders or pick values on the left, then click **Predict** to estimate unemployment probability within one month.")
 
